@@ -1,0 +1,6 @@
+name: Reusable
+channels:
+  - defaults
+dependencies:
+  - eigen
+prefix: /opt/homebrew/Caskroom/miniconda/base/envs/Eigen
