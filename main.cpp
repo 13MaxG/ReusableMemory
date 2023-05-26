@@ -20,7 +20,6 @@ public:
         for(auto& key : pool) {
             auto& q = key.second;
             while(q.size()>0) {
-                //std::cout<<"cleanup"<<std::endl;
                 delete q.front();
                 q.pop();
             }
@@ -44,7 +43,6 @@ public:
         auto result = std::shared_ptr<V>(pool[key].front(), 
             [key](V *item) { ReusablePool<K,V>::instance().release(key, item); } // [key] must be captured by copy. 
         );
-        //auto result = std::make_shared<V>(std::move(pool[key].front()));
         pool[key].pop();
         return result;
     };
@@ -64,13 +62,13 @@ public:
 
 template<>
 Eigen::VectorXd* ReusablePool<size_t, Eigen::VectorXd>::construct(const size_t& size) {
-    std::cout<<"Hello there: "<<size<<std::endl;
+    //std::cout<<"Hello there: "<<size<<std::endl;
     return new Eigen::VectorXd(size);
 }
 
 template<>
 Eigen::MatrixXd* ReusablePool<std::pair<size_t, size_t>, Eigen::MatrixXd>::construct(const std::pair<size_t, size_t>& sizes) {
-    std::cout<<"Hello there: "<<sizes.first<<" "<<sizes.second<<std::endl;
+    //std::cout<<"Hello there: "<<sizes.first<<" "<<sizes.second<<std::endl;
     return new Eigen::MatrixXd(sizes.first, sizes.second);
 }
 
